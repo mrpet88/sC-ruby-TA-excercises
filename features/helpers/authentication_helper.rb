@@ -3,6 +3,7 @@ module Auth
   # For every part of functionality of a project, you can create a new helper, to keep your TA organised.
   extend LapisLazuli
   class << self
+    $global_variable = "something"
 
     @@user = ''
     @login_page = 'training-page'
@@ -118,5 +119,26 @@ module Auth
         end
       end
     end
-  end
+
+    def whatever(arg)
+      if $global_variable == arg
+      puts "yes it is hello"
+      else
+        error "its not"
+      end
+    end
+
+    def changes(arg1)
+     $global_variable = arg1
+     end
+
+    def then(string)
+      if string != $global_variable
+        error "it is not the same"
+      end
+      else
+        $global_variable = "potato"
+    end
+
+    end
 end
