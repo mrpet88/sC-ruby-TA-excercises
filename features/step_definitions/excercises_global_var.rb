@@ -40,4 +40,25 @@ Then(/^the instance variable should be "(.*?)"$/) do |string03|
   else
     p "it is not"
   end
+  end
+
+# third excercise
+
+Given(/^the constant variable is "(.*?)"$/) do |number|
+  VAR1 = number
+  puts VAR1
+end
+
+When(/^the second constant variable is "(.*?)"$/) do |number2|
+  VAR2 = number2
+  puts VAR2
+
+end
+
+Then(/^confirm the constant variable is not "(.*?)"$/) do |number3|
+  if VAR1 != VAR2
+    p 'yes i confirm it, it is NOT!!'
+  else
+    p "it is"
+  end
 end
