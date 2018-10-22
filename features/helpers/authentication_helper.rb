@@ -11,26 +11,38 @@ module Auth
     # This is a list of elements relevant for this helper.
     # The following is short notation, *only* use this if the element selector can be done in 1 line.
     # @formatter:off
-    def form_container; browser.wait(:like => [:form, :id, 'form-login']); end
-    def username_field; form_container.input(:xpath => '//*[@id="login-username"]'); end
-    def password_field; form_container.input(:id => 'login-password'); end
-    def login_button; browser.button(:id => 'button-login'); end
+    def form_container;
+      browser.wait(:like => [:form, :id, 'form-login']);
+    end
+
+    def username_field;
+      form_container.input(:xpath => '//*[@id="login-username"]');
+    end
+
+    def password_field;
+      form_container.input(:id => 'login-password');
+    end
+
+    def login_button;
+      browser.button(:id => 'button-login');
+    end
+
     # @formatter:on
 
     # Following elements that need more advanced options/search patterns
-    def logged_in_element(timeout=10, throw=true)
+    def logged_in_element(timeout = 10, throw = true)
       browser.wait(
-        :like => [:a, :id, 'user_dropdown'],
-        :timeout => timeout,
-        :throw => throw
+          :like => [:a, :id, 'user_dropdown'],
+          :timeout => timeout,
+          :throw => throw
       )
     end
 
-    def logged_out_element(timeout=10, throw=true)
+    def logged_out_element(timeout = 10, throw = true)
       browser.wait(
-        :like => [:form, :id, 'form-login'],
-        :timeout => timeout,
-        :throw => throw
+          :like => [:form, :id, 'form-login'],
+          :timeout => timeout,
+          :throw => throw
       )
     end
 
@@ -49,7 +61,7 @@ module Auth
     end
 
     # Makes sure that a specific user is logged in, if it's not already.
-    def ensure_log_in(user='default-user')
+    def ensure_log_in(user = 'default-user')
       Nav.to('training-page')
       unless Auth.is_logged_in?(user)
         # If the wrong user is logged in, we should ensure a log out action and then log in again
@@ -63,7 +75,7 @@ module Auth
     end
 
     # If user=nil, any logged in user is acceptable, else we want to make sure the username matches with the logged in user.
-    def is_logged_in?(user=nil)
+    def is_logged_in?(user = nil)
       # For performance, we do a 0 second wait for the logged_out_element
       if Auth.logged_out_element(0, false)
         return false
@@ -96,12 +108,12 @@ module Auth
       Auth.logged_in_element.click
       dropdown = browser.wait(:like => [:ul, :class, 'dropdown-menu'])
       browser.find(
-        :like => [:a, :id, 'link-logout'],
-        :context => dropdown
+          :like => [:a, :id, 'link-logout'],
+          :context => dropdown
       ).click
     end
 
-    def log_in(user=nil, renew_session=false)
+    def log_in(user = nil, renew_session = false)
       # If user=nil, we expect that there already is user data loaded in a previous step.
       User.load_user_data(user) unless user.nil?
 
@@ -122,23 +134,23 @@ module Auth
 
     def whatever(arg)
       if $global_variable == arg
-      puts "yes it is hello"
+        puts "yes it is hello"
       else
         error "its not"
       end
     end
 
     def changes(arg1)
-     $global_variable = arg1
-     end
+      $global_variable = arg1
+    end
 
     def then(string)
       if string != $global_variable
         error "it is not the same"
       end
-      else
-        $global_variable = "potato"
+    else
+      $global_variable = "potato"
     end
 
-    end
+  end
 end
