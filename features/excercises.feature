@@ -19,3 +19,9 @@ When I want to learn how to use Global Variables
     Given the constant variable is "100"
     When the second constant variable is "200"
     Then confirm the constant variable is not "100"
+
+  @variable_04
+  Scenario: example04 - operators
+    Given the first number is "5" and the second number is "5"
+    When i add them the result is "10"
+#    Then  the variable is less "6"

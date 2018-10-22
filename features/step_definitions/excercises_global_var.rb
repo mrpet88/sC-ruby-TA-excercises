@@ -62,3 +62,30 @@ Then(/^confirm the constant variable is not "(.*?)"$/) do |number3|
     p "it is"
   end
 end
+
+# fourth excercise
+
+Given(/^the first number is "(.*?) and the second number is "(.*?)"$/) do |number,number2|
+  number =5
+  number2 = 5
+
+  @theResult = number2 + number
+  puts @theResult
+
+end
+
+When(/^i add them the result is "(.*?)"$/) do |result|
+  if @theResult == result.to_i
+    puts "right result"
+  else
+    puts "wrong result"
+  end
+end
+
+# Then(/^the variable is less "(.*?)"$/) do |number3|
+#   if @second_number
+#     p "yes i confirm it, it is now #{number3}"
+#   else
+#     p "no it is not #{@comparable_number}"
+#   end
+# end
